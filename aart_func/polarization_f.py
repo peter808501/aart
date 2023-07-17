@@ -6,16 +6,16 @@ from params import *
 #Radial profile as an example
 
 def Bt_f(r,th,Delta,ut,uphi,a):
-    return 4.94692758e-17
+    return 0
 
 def Br_f(r,th,Delta,ut,uphi,a):
-    return 5.79717403e-01
+    return 0
 
 def Bth_f(r,th,Delta,ut,uphi,a):
-    return -2.53899711e-17
+    return -0.1
 
 def Bphi_f(r,th,Delta,ut,uphi,a):
-    return -1.18333333e-01
+    return 0
 
 def kappaeq(r,a,lamb,eta,Delta,redshift_sign,sqR,ut,ur,uphi,Bt,Br,Bth,Bphi):
     """

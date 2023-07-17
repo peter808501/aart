@@ -4,9 +4,9 @@ print("\nThanks for using AART")
 print("Copyright (C) 2022, A. Cardenas-Avendano, H. Zhu & A. Lupsasca\n")
 
 #BH's Spin
-spin_case=0.94
+spin_case=0.02
 #Observer's inclination  
-i_case=17
+i_case=20
 
 # Distance to the BH in meters (default: M87)
 dBH=5.214795112e23  
