@@ -26,7 +26,7 @@ def b_local_array (b_r, b_phi, b_theta):
 # quantities like delta, xi, and omega_zamo are found in equation 2 of Zack's paper.
 def zamo_transform_matrix (r_source):
     delta = r_source**2 - 2*r_source + spin_case**2
-    xi = (r_source**2 + spin_case**2)**2 - delta * (spin_case**2) * (np.sin(i_case))**2
+    xi = (r_source**2 + spin_case**2)**2 - delta * (spin_case**2)
     omega_zamo = (2 * spin_case * r_source) / xi
     entry1_1 = (1/r_source) * np.sqrt(xi/delta)
     entry1_3 = (omega_zamo / r_source) * np.sqrt(xi/delta)
