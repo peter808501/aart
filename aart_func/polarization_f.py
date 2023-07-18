@@ -12,7 +12,7 @@ def Br_f(r,th,Delta,ut,uphi,a):
     return 0
 
 def Bth_f(r,th,Delta,ut,uphi,a):
-    return -0.1
+    return -0.125
 
 def Bphi_f(r,th,Delta,ut,uphi,a):
     return 0
