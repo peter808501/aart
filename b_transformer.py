@@ -14,12 +14,16 @@ on the equatorial plane, then it can be described as "equatorial" """
 
 
 
-def b_local_array (b_r, b_theta, b_phi): 
+# this function is very simple, it takes the r, phi, and theta components INDEPENDENTLY from the user, and puts them into an array. That's it!
+"""notice that we are in the order of r, phi, and theta, NOT r, theta, and phi. We are using Zack's convention here."""
+def b_local_array (b_r, b_phi, b_theta): 
     b_t = 0
-    b_local_array = [b_t, b_r, b_theta, b_phi]
+    b_local_array = [b_t, b_r, b_phi, b_theta]
     return b_local_array
 
-
+# this function returns the matrix that transforms the local magnetic field to the ZAMO magnetic field. 
+# The exact formula for the matrix can be found in Appendix A equation A1 in Zack's paper (Zachary Gelles, Polarized Image of Equatorial Emission in the Kerr Geometry, 2021)
+# quantities like delta, xi, and omega_zamo are found in equation 2 of Zack's paper.
 def zamo_transform_matrix (r_source):
     delta = r_source**2 - 2*r_source + spin_case**2
     xi = (r_source**2 + spin_case**2)**2 - delta * (spin_case**2) * (np.sin(i_case))**2
@@ -33,13 +37,11 @@ def zamo_transform_matrix (r_source):
     return zamo_transform_matrix
 
 
-
+# this function returns the matrix that transforms the ZAMO magnetic field to the observer magnetic field. 
+# the exact formula to this matrix can be found in Appendix A equation A3 in Zack's paper.
+# beta and kai are given in equation 46 of Zack's paper. 
 def boost_transform_matrix(r_source):
     beta = (spin_case**2 - 2 * np.abs(spin_case) * np.sqrt(r_source) + r_source**2) / (np.sqrt(spin_case**2 + r_source * (r_source -2)) * (np.abs(spin_case) + r_source*1.5))
-    # is the order of the zamo transform is switch due to theta and phi being misplaced,
-# why is this matrix not switched? Perhaps Zach realized that this lorentz matrix is given
-# in the order (r, theta, phi) which is why he switched the other one? But then there is
-# inconsistency in his paper...
     kai = - np.pi/2
     gamma = 1/(np.sqrt(1-beta**2))
     bentry1_1 = gamma
@@ -55,6 +57,9 @@ def boost_transform_matrix(r_source):
     return boost_transform_matrix
 
 
+# this is the master function that takes in the local magnetic field and the emission radius, and returns the observer magnetic field.
+# it utilizes all of the functions above. 
+# I think this code is pretty easy to read, hopefully. 
 def b_local_to_observer_transform(b_r, b_theta, b_phi, r_source):
     b_local_array1 = b_local_array(b_r, b_theta, b_phi)
     zamo_transform_matrix1 = zamo_transform_matrix(r_source) 
